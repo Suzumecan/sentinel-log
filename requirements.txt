@@ -1,0 +1,3 @@
+# Sentinel-Log uses Python standard library only
+# No external dependencies required
+
