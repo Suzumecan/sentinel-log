@@ -1,14 +1,3 @@
-Siap. Di bawah ini adalah **versi README.md yang dipoles ke level profesional / korporat / HR-friendly**, cocok untuk:
-
-* GitHub portfolio
-* Recruiter screening
-* Hiring manager (SOC / Security Engineer)
-* Academic & professional review
-
-Bahasanya **netral, formal, enterprise-oriented**, dan aman secara etika.
-
----
-
 # 🛡️ Sentinel-Log
 
 **Enterprise-Grade Defensive Log Analysis & Intrusion Detection Tool**
@@ -296,12 +285,4 @@ MIT License
 Free to use for **educational, academic, and defensive security purposes**.
 
 ---
-
-Kalau mau, next gue bisa:
-
-* 🔥 Poles **README biar ATS-friendly**
-* 🔥 Tambahin **“Why This Project Matters” untuk recruiter**
-* 🔥 Bikin **resume bullet points langsung dari project ini**
-
-Tinggal bilang.
 
