@@ -1,31 +1,42 @@
+Siap. Di bawah ini adalah **versi README.md yang dipoles ke level profesional / korporat / HR-friendly**, cocok untuk:
+
+* GitHub portfolio
+* Recruiter screening
+* Hiring manager (SOC / Security Engineer)
+* Academic & professional review
+
+Bahasanya **netral, formal, enterprise-oriented**, dan aman secara etika.
+
+---
+
 # 🛡️ Sentinel-Log
 
-**Enterprise Defensive Log Analysis & Intrusion Detection Tool**
+**Enterprise-Grade Defensive Log Analysis & Intrusion Detection Tool**
 
-Sentinel-Log adalah **tools keamanan defensif (Blue Team)** berbasis Python yang dirancang untuk **menganalisis dan memantau log sistem** guna mendeteksi aktivitas mencurigakan, seperti *brute-force authentication attempts* dan anomali perilaku akses.
+Sentinel-Log is a **Python-based defensive security tool** designed to perform **system log analysis and intrusion detection** by identifying suspicious activities such as *authentication brute-force attempts* and abnormal access behavior.
 
-Tools ini dikembangkan dengan pendekatan **Security Operations Center (SOC)** dan **enterprise security monitoring**, mendukung **analisis log batch** maupun **pemantauan real-time**, tanpa melakukan serangan, eksploitasi, atau perubahan terhadap sistem target.
+Developed with a **Security Operations Center (SOC)** and **enterprise security monitoring** mindset, Sentinel-Log supports both **batch log analysis** and **real-time monitoring**, while strictly operating in a **read-only and non-intrusive manner**.
 
-> ⚠️ **Sentinel-Log adalah tools defensif.**
-> Tidak melakukan scanning aktif, brute-force, eksploitasi, maupun pemblokiran otomatis.
+> ⚠️ **Sentinel-Log is a defensive security tool.**
+> It does **not** perform active scanning, brute-force attacks, exploitation, automated blocking, or system modification.
 
 ---
 
 ## 🎯 Purpose & Scope
 
-Sentinel-Log ditujukan untuk:
+Sentinel-Log is intended for:
 
-* Analisis keamanan berbasis log
-* Monitoring aktivitas autentikasi
-* Deteksi dini indikasi serangan
-* Pembelajaran dan simulasi workflow SOC
-* Portofolio teknis bidang **Cybersecurity / Blue Team**
+* Security log analysis and monitoring
+* Authentication activity inspection
+* Early detection of potential security incidents
+* SOC workflow simulation and learning
+* Cybersecurity / Blue Team technical portfolio projects
 
-Tools ini **aman digunakan** di lingkungan:
+The tool is safe to use in:
 
-* Akademik & pembelajaran
-* Lab internal
-* Infrastruktur perusahaan (read-only log access)
+* Academic and educational environments
+* Internal security labs
+* Corporate infrastructures (with read-only log access)
 
 ---
 
@@ -33,26 +44,26 @@ Tools ini **aman digunakan** di lingkungan:
 
 ### 🔍 Log Analysis (Batch Mode)
 
-* Analisis log berbasis **rule configuration**
-* Deteksi menggunakan **threshold & sliding time window**
-* Perhitungan **overall risk level** (LOW / MEDIUM / HIGH)
-* **Incident ID** untuk keperluan audit & tracking
-* Output CLI yang terstruktur untuk analis keamanan
+* Rule-based log analysis
+* Detection using **threshold-based sliding time windows**
+* Overall **risk level assessment** (LOW / MEDIUM / HIGH)
+* Unique **Incident ID** generation for audit and tracking
+* Structured CLI output for security analysts
 
 ### ⚡ Real-Time Monitoring
 
-* Mode **real-time log monitoring (`--follow`)**
-* Deteksi kejadian secara langsung (tail-style)
-* **Alert rate-limiting** untuk menghindari alert flooding
-* Cocok untuk penggunaan SOC / monitoring service
+* Continuous log monitoring (`--follow`, tail-style)
+* Immediate detection of suspicious events
+* Alert rate-limiting to reduce alert fatigue
+* Suitable for SOC monitoring and operational environments
 
 ### 🧠 Enterprise-Oriented Design
 
-* **MITRE ATT&CK mapping**
-* **JSON output** (SIEM / SOAR ready)
-* **CSV export** untuk reporting & compliance
-* **SOC-standard exit codes**
-* IP whitelist untuk mengurangi false positive
+* **MITRE ATT&CK technique mapping**
+* **JSON output** for SIEM / SOAR integration
+* **CSV export** for reporting and compliance
+* SOC-standard exit codes for automation
+* IP whitelisting to minimize false positives
 
 ---
 
@@ -61,7 +72,7 @@ Tools ini **aman digunakan** di lingkungan:
 ```
 sentinel-log/
 ├── analyzer.py        # Core analysis engine
-├── config.json        # Detection rules & settings
+├── config.json        # Detection rules and settings
 ├── logs/
 │   └── sample.log     # Demonstration log (example only)
 ├── screenshots/       # Documentation assets
@@ -73,8 +84,8 @@ sentinel-log/
 
 ## ⚙️ Requirements
 
-* Python **3.8+**
-* Linux / Unix-like OS
+* Python **3.8 or later**
+* Linux / Unix-like operating system
   (Tested on Kali Linux)
 
 Install dependencies:
@@ -83,25 +94,25 @@ Install dependencies:
 pip install -r requirements.txt
 ```
 
-> Sentinel-Log menggunakan **Python standard library**, tanpa framework ofensif atau dependency berisiko.
+> Sentinel-Log relies exclusively on the **Python standard library** and does not require offensive frameworks or high-risk dependencies.
 
 ---
 
 ## 🚀 Getting Started
 
 ```bash
-# Clone repository
+# Clone the repository
 git clone https://github.com/username/sentinel-log.git
 cd sentinel-log
 
-# (Optional) Virtual environment
+# (Optional) Create a virtual environment
 python3 -m venv venv
 source venv/bin/activate
 
 # Install dependencies
 pip install -r requirements.txt
 
-# Run analysis using sample log
+# Run analysis using the sample log
 python analyzer.py
 ```
 
@@ -109,7 +120,7 @@ python analyzer.py
 
 ## 🧩 Configuration Overview (`config.json`)
 
-Konfigurasi Sentinel-Log sepenuhnya berbasis file JSON.
+Sentinel-Log is fully configurable through a JSON-based configuration file.
 
 ```json
 {
@@ -133,8 +144,8 @@ Konfigurasi Sentinel-Log sepenuhnya berbasis file JSON.
 ```
 
 📌 **Note:**
-`sample.log` hanya digunakan untuk demonstrasi.
-Pada lingkungan produksi, gunakan log sistem asli seperti `/var/log/auth.log`.
+`sample.log` is provided for demonstration purposes only.
+For real-world usage, system logs such as `/var/log/auth.log` should be used.
 
 ---
 
@@ -146,7 +157,7 @@ Pada lingkungan produksi, gunakan log sistem asli seperti `/var/log/auth.log`.
 python analyzer.py --log /var/log/auth.log
 ```
 
-Dengan output file:
+With output files:
 
 ```bash
 python analyzer.py --json report.json --csv report.csv
@@ -160,7 +171,7 @@ python analyzer.py --json report.json --csv report.csv
 python analyzer.py --log /var/log/auth.log --follow
 ```
 
-Contoh output:
+Example output:
 
 ```
 [ALERT][REALTIME] Rule=ssh_failed_login IP=10.10.10.5 Severity=HIGH
@@ -170,16 +181,16 @@ Contoh output:
 
 ## 🧪 Detection Methodology
 
-Sentinel-Log menggunakan pendekatan:
+Sentinel-Log applies the following detection techniques:
 
 * Sliding time window analysis
 * Rule-based threshold detection
 * IP whitelisting
-* MITRE ATT&CK technique mapping
+* MITRE ATT&CK technique correlation
 
-Contoh use case:
+Example detections:
 
-* SSH brute-force → **MITRE T1110**
+* SSH brute-force attempts → **MITRE ATT&CK T1110**
 * Suspicious authentication behavior
 
 ---
@@ -231,43 +242,43 @@ IP Address        Count    Status
 | 1    | Medium risk detected |
 | 2    | High risk detected   |
 
-Exit code ini memungkinkan integrasi dengan:
+These exit codes enable integration with:
 
-* Cron job
-* CI/CD pipeline
-* Automation script
-* SOAR workflow
+* Cron jobs
+* CI/CD pipelines
+* Automation scripts
+* SOAR workflows
 
 ---
 
 ## 🛡️ Security & Ethical Statement
 
-Sentinel-Log adalah **tools keamanan defensif** yang:
+Sentinel-Log is a **defensive security tool** that:
 
-* Tidak melakukan scanning aktif
-* Tidak melakukan brute-force
-* Tidak memodifikasi sistem
-* Tidak melakukan blocking otomatis
+* Does not perform active scanning
+* Does not execute brute-force attacks
+* Does not exploit vulnerabilities
+* Does not modify or block system resources
 
-Tools ini dirancang untuk **monitoring, detection, dan analysis**, bukan eksploitasi.
+The tool is designed strictly for **monitoring, detection, and analysis**, not exploitation.
 
 ---
 
 ## 🎓 Intended Use
 
 * Security Operations Center (SOC)
-* Blue Team training & practice
+* Blue Team training and practice
 * Log analysis exercises
-* Cybersecurity portfolio project
-* Academic / educational assignment
+* Cybersecurity portfolio projects
+* Academic and educational assignments
 
 ---
 
 ## 📌 Roadmap
 
-* systemd service support
+* systemd service integration
 * Docker-based deployment
-* Unit testing & coverage
+* Unit testing and coverage
 * SIEM-specific output formats
 
 ---
@@ -285,4 +296,12 @@ MIT License
 Free to use for **educational, academic, and defensive security purposes**.
 
 ---
+
+Kalau mau, next gue bisa:
+
+* 🔥 Poles **README biar ATS-friendly**
+* 🔥 Tambahin **“Why This Project Matters” untuk recruiter**
+* 🔥 Bikin **resume bullet points langsung dari project ini**
+
+Tinggal bilang.
 
