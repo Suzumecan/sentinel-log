@@ -1,0 +1,32 @@
+{
+  "log_file": "logs/sample.log",
+  "time_window_minutes": 5,
+  "whitelist_ips": ["127.0.0.1"],
+  
+  "telegram": {
+    "enabled": false,
+    "token": "YOUR_BOT_TOKEN_HERE", 
+    "chat_id": "YOUR_CHAT_ID_HERE",
+    "notify_level": "MEDIUM",
+    "include_realtime": true,
+    "include_batch": true,
+    "rate_limit_seconds": 60
+  },
+  
+  "_comment_telegram": "Dapatkan token dari @BotFather, chat_id dari @userinfobot",
+  "_comment_whitelist": "Tambahkan IP yang tidak ingin di-alert",
+  
+  "rules": {
+    "ssh_failed_login": {
+      "enabled": true,
+      "threshold": 3,
+      "severity": "HIGH",
+      "weight": 3,
+      "pattern": "Failed password.*from (\\d+\\.\\d+\\.\\d+\\.\\d+)",
+      "mitre": {
+        "technique": "T1110",
+        "name": "Brute Force"
+      }
+    }
+  }
+}

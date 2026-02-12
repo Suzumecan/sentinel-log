@@ -1,6 +1,8 @@
-# Test output
-*.json
-*.csv
+# Output files only
+report*.json
+report*.csv
+output*.json
+output*.csv
 
 # Python cache
 __pycache__/
@@ -9,3 +11,4 @@ __pycache__/
 # Virtual environment
 venv/
 .env
+
