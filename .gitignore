@@ -1,14 +1,21 @@
-# Output files only
-report*.json
-report*.csv
-output*.json
-output*.csv
+# Sensitive data
+/tmp/sentinel-pro/
+/var/lib/sentinel/
+*.log
+*.lock
+cache_*
 
-# Python cache
-__pycache__/
-*.pyc
+# Config dengan token
+config.json
+!config.sample.json
 
-# Virtual environment
-venv/
-.env
+# OS files
+.DS_Store
+Thumbs.db
+*.swp
+*.swo
+*~
 
+# IDE
+.vscode/
+.idea/

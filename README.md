@@ -1,358 +1,112 @@
-# 🛡️ Sentinel-Log
+# Sentinel-PRO - Real-time Security Monitor
 
-**Enterprise Defensive Intrusion Detection & Log Intelligence System (IDS/LIEM)**
+![Version](https://img.shields.io/badge/version-6.0-blue)
+![License](https://img.shields.io/badge/license-MIT-green)
+![Bash](https://img.shields.io/badge/bash-5.0%2B-orange)
 
-Sentinel-Log is a **Blue Team–oriented defensive security tool** designed for **enterprise-grade log analysis, intrusion detection, and real-time monitoring**. It operates in a **purely defensive model**, focusing on detection, analysis, alerting, and monitoring — without performing any exploitation, scanning, or offensive actions.
+Sentinel-PRO adalah **real-time security monitoring tool** yang mendeteksi serangan SSH brute force, port scanning, dan Nmap scan secara langsung dari log sistem. **100% passive detection - no blocking!**
 
-Sentinel-Log is designed to simulate **real SOC (Security Operations Center) workflows**, supporting:
+## ✨ Fitur Utama
 
-* Batch log analysis
-* Real-time detection
-* Risk scoring
-* Incident correlation
-* SOC-style alerting
-* Telegram SOC notifications
-* Enterprise-ready deployment
+- 🔑 **SSH Brute Force Detection** - Alert jika 3x gagal login dalam 60 detik
+- ✅ **SSH Success Login Alert** - Real-time notifikasi login berhasil
+- 🔍 **Nmap Scan Detection** - SYN, UDP, FIN, NULL, XMAS, OS fingerprinting
+- 🎯 **Port Scan Detection** - Multi-port scanning dari UFW log
+- 🌍 **GeoIP Lookup** - Lihat negara penyerang langsung dari Telegram
+- ⚡ **Anti Spam** - Cooldown 5 menit per IP
+- 🚫 **No Blocking** - Passive detection only, aman untuk production
 
-> ⚠️ **Defensive Security Tool Only**
-> Sentinel-Log does NOT perform scanning, brute-force, exploitation, blocking, or active probing.
+## 📋 Prasyarat
 
----
+- Ubuntu/Debian (atau Linux dengan systemd)
+- `curl` - Untuk kirim Telegram
+- `ufw` - Untuk firewall logging (optional, tapi direkomendasikan)
 
-## 🎯 Project Vision
-
-Sentinel-Log is built as:
-
-* 🛡️ **Blue Team platform**
-* 🧠 **SOC training framework**
-* 📊 **Security monitoring system**
-* 📁 **Log intelligence engine**
-* 🎓 **Cybersecurity portfolio project**
-* 🏢 **Enterprise security simulation tool**
-
-It focuses on **detection engineering**, not exploitation.
-
----
-
-## 🏗️ Architecture Overview
-
-Sentinel-Log follows a modular defensive architecture:
-
-```
-┌──────────────┐
-│  Log Source  │  →  auth.log / syslog / app logs
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Log Parser   │  → timestamp + IP extraction
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Rule Engine  │  → regex + threshold + window
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Risk Engine  │  → scoring + correlation
-└──────┬───────┘
-       │
-       ▼
-┌──────────────┐
-│ Alert Engine │  → CLI + JSON + CSV + Telegram
-└──────────────┘
-```
-
----
-
-## ✨ Core Features
-
-### 🔍 Log Intelligence Engine
-
-* Multi-format log parsing
-* Timestamp normalization
-* IP extraction & validation
-* CIDR whitelist support
-* Sliding time-window correlation
-
-### 🧠 Detection Engine
-
-* Rule-based detection
-* Regex-driven signatures
-* Threshold-based alerts
-* Behavior correlation
-* SOC-style detection logic
-
-### 📊 Risk Engine
-
-* Weighted scoring
-* Multi-rule correlation
-* Risk classification:
-
-  * LOW
-  * MEDIUM
-  * HIGH
-  * CRITICAL
-
-### ⚡ Real-Time Monitoring
-
-* Tail-style log following
-* Sliding buffer detection
-* Real-time correlation
-* Alert rate-limiting
-* SOC live monitoring mode
-
-### 📢 SOC Alerting
-
-* CLI alerts
-* JSON export (SIEM-ready)
-* CSV export (compliance/reporting)
-* Telegram SOC integration
-* Severity filtering
-* Alert batching
-
----
-
-## 📡 Telegram SOC Integration
-
-Sentinel-Log supports **enterprise Telegram SOC alerts**:
-
-Features:
-
-* Real-time alerts
-* Batch analysis alerts
-* Severity filtering
-* Rate limiting
-* SOC formatting
-* Incident IDs
-* MITRE ATT&CK tagging
-
----
-
-## 🧩 Project Structure
-
-```
-sentinel-log/
-├── analyzer.py        # Core IDS engine
-├── config.json        # Detection rules & settings
-├── logs/
-│   └── sample.log     # Demo logs
-├── screenshots/       # Documentation assets
-├── requirements.txt   # Dependencies
-├── LICENSE
-└── README.md
-```
-
----
-
-## ⚙️ Requirements
-
-* Python **3.8+**
-* Linux / Unix-like OS
-
-Dependencies:
-
-```bash
-pip install -r requirements.txt
-```
-
-Minimal dependencies:
-
-* `requests` → Telegram API
-* All core logic uses Python standard library
-
----
-
-## 🚀 Quick Start
+## 🚀 Instalasi Cepat
 
 ```bash
 # Clone repository
-git clone https://github.com/Suzumecan/sentinel-log.git
-cd sentinel-log
-
-# Virtual environment (recommended)
-python3 -m venv venv
-source venv/bin/activate
+git clone https://github.com/username/sentinel-pro.git
+cd sentinel-pro
 
 # Install dependencies
-pip install -r requirements.txt
+sudo apt update && sudo apt install -y curl ufw
 
-# Run batch analysis
-python analyzer.py
-```
+# Setup konfigurasi
+cp config.sample.json /etc/sentinel/config.json
+nano /etc/sentinel/config.json  # Isi token & chat_id Telegram
 
----
+# Jalankan
+sudo ./sentinel.sh
 
-## ▶️ Usage
 
-### 📁 Batch Analysis
+📱 Setup Telegram Bot
 
-```bash
-python analyzer.py --log /var/log/auth.log
-```
+Chat ke @BotFather di Telegram
 
-### 📤 Export Reports
+Kirim /newbot dan ikuti petunjuk
 
-```bash
-python analyzer.py --json report.json --csv report.csv
-```
+Dapatkan token, simpan di config
 
-### ⚡ Real-Time Monitoring
+Chat ke @userinfobot dapatkan chat_id
 
-```bash
-python analyzer.py --follow --log /var/log/auth.log
-```
+Masukkan ke file config
 
----
 
-## 🧠 Detection Philosophy
+⚙️ Konfigurasi
 
-Sentinel-Log uses:
+Edit /etc/sentinel/config.json:
 
-* Sliding window analysis
-* Behavior-based correlation
-* Rule-based detection
-* Threshold logic
-* Risk scoring
-* MITRE ATT&CK mapping
+{
+  "telegram": {
+    "token": "YOUR_BOT_TOKEN",
+    "chat_id": "YOUR_CHAT_ID"
+  },
+  "thresholds": {
+    "ssh_brute": 3,
+    "port_scan": 5,
+    "syn_flood": 20
+  }
+}
 
-This simulates **real SOC detection engineering**.
 
----
+🎯 Cara Penggunaan
 
-## 📄 Example Detection Output
+# Jalankan di foreground
+sudo ./sentinel.sh
 
-```text
-[INCIDENT] INC-20260115-AB12CD
-[RISK] HIGH
+# Jalankan di background dengan screen
+sudo apt install screen -y
+screen -dmS sentinel sudo ./sentinel.sh
 
-Rule     : ssh_failed_login
-Severity : HIGH
-MITRE    : T1110 - Brute Force
-IP Address        Count    Status
-192.168.1.10      3        ALERT
-```
+# Stop semua proses
+sudo ./sentinel.sh kill
 
----
+# Lihat log
+tail -f /tmp/sentinel-pro/*.log
 
-## 📜 Exit Codes (SOC Standard)
 
-| Code | Meaning       |
-| ---- | ------------- |
-| 0    | No threat     |
-| 1    | Medium risk   |
-| 2    | High risk     |
-| 3    | Critical risk |
+📊 Contoh Alert Telegram
 
----
+🚨 SSH BRUTE FORCE 🚨
+┌─ 🌍 IP     : 185.142.53.123
+├─ 📍 Negara : NL
+├─ 🔢 Attempt: 3 kali/60s
+└─ ⏰ Waktu  : 14:32:15 12/02/2026
 
-## 🧠 Deployment Model
+🔒 Security Notes
+TIDAK ADA IP PALSU! - Semua alert dari log asli
 
-Sentinel-Log supports:
+PASSIVE DETECTION ONLY - Tidak ada blocking/iptables
 
-* Manual execution
-* Background daemon mode
-* systemd service deployment
-* SOC server deployment
-* VM deployment
-* Lab environment
-* Enterprise simulation
+Token Telegram aman - Baca dari file config, bukan hardcode
 
----
+📄 Lisensi
+MIT License - Lihat LICENSE untuk detail
 
-## 🔧 systemd Service Support (Enterprise Mode)
+👨‍💻 Author
+Ikhsan Rasyid Rabbani
 
-Sentinel-Log can be deployed as a **system service**:
+GitHub: Suzumecan
 
-```bash
-sudo systemctl start sentinel-log
-sudo systemctl stop sentinel-log
-sudo systemctl status sentinel-log
-```
-
-This allows:
-
-* Auto-start on boot
-* Headless monitoring
-* Server-mode operation
-* Continuous SOC monitoring
-
----
-
-## 🛡️ Security & Ethics
-
-Sentinel-Log is strictly:
-
-* Defensive
-* Passive
-* Monitoring-only
-* Detection-only
-* Analysis-only
-
-❌ No exploitation
-❌ No scanning
-❌ No brute-force
-❌ No attack features
-
----
-
-## 🎓 Intended Use
-
-* SOC training
-* Blue Team labs
-* Detection engineering practice
-* Cybersecurity education
-* Defensive research
-* Security portfolio
-* Academic projects
-
----
-
-## 🗺️ Roadmap
-
-### v3 (Current)
-
-* Enterprise IDS engine
-* Telegram SOC alerts
-* Real-time monitoring
-* Risk engine
-* systemd deployment
-
-### v4 (Planned)
-
-* Multi-log source
-* Plugin detection engine
-* Detection packs
-* Multi-agent support
-* Centralized dashboard
-
-### v5 (Future)
-
-* Web UI
-* SOC dashboard
-* SIEM integration
-* Multi-node correlation
-* Threat intelligence feeds
-
----
-
-## 👤 Author
-
-**Ikhsan Rasyid Rabbani**
-Cybersecurity Student
-Blue Team Specialist
-SOC & Detection Engineering Enthusiast
-
----
-
-## 📜 License
-
-MIT License
-Free to use for **educational, academic, and defensive security purposes**.
-
----
-
-> "Defense is not about reacting to attacks. It's about understanding behavior before damage happens."
-> — Sentinel-Log Philosophy
-
+LinkedIn: Ikhsan Rasyid Rabbani
