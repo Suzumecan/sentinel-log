@@ -1,393 +1,358 @@
-# 🛡️ Sentinel-Log v2.0
+# 🛡️ Sentinel-Log
 
-**Enterprise-Grade Defensive IDS | SOC Automation | Real-Time Threat Detection**
+**Enterprise Defensive Intrusion Detection & Log Intelligence System (IDS/LIEM)**
 
-[![License: MIT](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![Python 3.8+](https://img.shields.io/badge/python-3.8+-blue.svg)](https://www.python.org/downloads/)
-[![Telegram](https://img.shields.io/badge/Telegram-Integration-26A5E4.svg)](https://telegram.org)
-[![MITRE ATT&CK](https://img.shields.io/badge/MITRE-ATT%26CK-red.svg)](https://attack.mitre.org)
+Sentinel-Log is a **Blue Team–oriented defensive security tool** designed for **enterprise-grade log analysis, intrusion detection, and real-time monitoring**. It operates in a **purely defensive model**, focusing on detection, analysis, alerting, and monitoring — without performing any exploitation, scanning, or offensive actions.
 
-Sentinel-Log is a **production-grade intrusion detection system** that transforms raw system logs into actionable security intelligence. Built for **SOC analysts** and **Blue Teams**, it combines **enterprise detection engineering** with **pragmatic deployment** - no agents, no kernel modules, just pure log analysis.
+Sentinel-Log is designed to simulate **real SOC (Security Operations Center) workflows**, supporting:
 
-> 🚀 **New in v2.0**: Telegram real-time alerts, CRITICAL risk level, CIDR whitelist, multi-format timestamp parsing, and enterprise reporting!
+* Batch log analysis
+* Real-time detection
+* Risk scoring
+* Incident correlation
+* SOC-style alerting
+* Telegram SOC notifications
+* Enterprise-ready deployment
 
----
-
-## 🎯 Key Differentiators
-
-| Feature | Sentinel-Log | Traditional IDS |
-|--------|--------------|-----------------|
-| **Deployment** | No agents, read-only | Kernel modules, network taps |
-| **Detection** | Threshold-based sliding window | Signature & anomaly |
-| **Integration** | Telegram, JSON, CSV, SIEM | Proprietary consoles |
-| **Cost** | Free, open-source | $$$ Enterprise licensing |
-| **Use Case** | Log analysis, SOC automation | Network monitoring |
+> ⚠️ **Defensive Security Tool Only**
+> Sentinel-Log does NOT perform scanning, brute-force, exploitation, blocking, or active probing.
 
 ---
 
-## ✨ Enterprise Features
+## 🎯 Project Vision
 
-### 🔥 Advanced Detection Engine
-- **Threshold-based sliding windows** with configurable timeframes
-- **CIDR whitelist support** (e.g., `192.168.1.0/24`)
-- **Multiple timestamp formats** (Syslog, ISO8601, Apache)
-- **CRITICAL risk level** for severe incidents (score ≥ 10)
-- **MITRE ATT&CK mapping** (v12+ technique support)
+Sentinel-Log is built as:
 
-### 📱 SOC Automation
-- **Telegram real-time alerts** with rate limiting
-- **Severity-based notification filtering** (LOW/MEDIUM/HIGH/CRITICAL)
-- **Startup monitoring notifications**
-- **Attack summary with top offenders**
-- **60-second alert deduplication**
+* 🛡️ **Blue Team platform**
+* 🧠 **SOC training framework**
+* 📊 **Security monitoring system**
+* 📁 **Log intelligence engine**
+* 🎓 **Cybersecurity portfolio project**
+* 🏢 **Enterprise security simulation tool**
 
-### 📊 Enterprise Reporting
-- **JSON export** with incident metadata
-- **CSV reporting** for compliance audit trails
-- **Pretty CLI tables** for analyst review
-- **SOC-standard exit codes** (0-3 for automation)
-- **Unique incident IDs** for ticketing integration
+It focuses on **detection engineering**, not exploitation.
 
 ---
 
-## 🏗️ Architecture
+## 🏗️ Architecture Overview
+
+Sentinel-Log follows a modular defensive architecture:
+
+```
+┌──────────────┐
+│  Log Source  │  →  auth.log / syslog / app logs
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│ Log Parser   │  → timestamp + IP extraction
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│ Rule Engine  │  → regex + threshold + window
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│ Risk Engine  │  → scoring + correlation
+└──────┬───────┘
+       │
+       ▼
+┌──────────────┐
+│ Alert Engine │  → CLI + JSON + CSV + Telegram
+└──────────────┘
+```
+
+---
+
+## ✨ Core Features
+
+### 🔍 Log Intelligence Engine
+
+* Multi-format log parsing
+* Timestamp normalization
+* IP extraction & validation
+* CIDR whitelist support
+* Sliding time-window correlation
+
+### 🧠 Detection Engine
+
+* Rule-based detection
+* Regex-driven signatures
+* Threshold-based alerts
+* Behavior correlation
+* SOC-style detection logic
+
+### 📊 Risk Engine
+
+* Weighted scoring
+* Multi-rule correlation
+* Risk classification:
+
+  * LOW
+  * MEDIUM
+  * HIGH
+  * CRITICAL
+
+### ⚡ Real-Time Monitoring
+
+* Tail-style log following
+* Sliding buffer detection
+* Real-time correlation
+* Alert rate-limiting
+* SOC live monitoring mode
+
+### 📢 SOC Alerting
+
+* CLI alerts
+* JSON export (SIEM-ready)
+* CSV export (compliance/reporting)
+* Telegram SOC integration
+* Severity filtering
+* Alert batching
+
+---
+
+## 📡 Telegram SOC Integration
+
+Sentinel-Log supports **enterprise Telegram SOC alerts**:
+
+Features:
+
+* Real-time alerts
+* Batch analysis alerts
+* Severity filtering
+* Rate limiting
+* SOC formatting
+* Incident IDs
+* MITRE ATT&CK tagging
+
+---
+
+## 🧩 Project Structure
+
+```
 sentinel-log/
-├── analyzer.py # Core detection engine (2.0)
-├── config.json # Enterprise configuration
-├── requirements.txt # Dependencies (requests)
-├── LICENSE # MIT License
-├── README.md # You are here
+├── analyzer.py        # Core IDS engine
+├── config.json        # Detection rules & settings
 ├── logs/
-│ └── sample.log # 6 attack scenarios demo
-└── screenshots/
-├── batch-analysis.png # CLI output demo
-└── telegram-alert.jpg # Mobile notification
+│   └── sample.log     # Demo logs
+├── screenshots/       # Documentation assets
+├── requirements.txt   # Dependencies
+├── LICENSE
+└── README.md
+```
 
 ---
 
-## ⚡ Quick Start (3 Minutes)
+## ⚙️ Requirements
 
-### 1. Install
+* Python **3.8+**
+* Linux / Unix-like OS
+
+Dependencies:
+
+```bash
+pip install -r requirements.txt
+```
+
+Minimal dependencies:
+
+* `requests` → Telegram API
+* All core logic uses Python standard library
+
+---
+
+## 🚀 Quick Start
 
 ```bash
 # Clone repository
-git clone https://github.com/ikhsan-rasyid/sentinel-log.git
+git clone https://github.com/Suzumecan/sentinel-log.git
 cd sentinel-log
 
-# Install dependencies (only requests required)
+# Virtual environment (recommended)
+python3 -m venv venv
+source venv/bin/activate
+
+# Install dependencies
 pip install -r requirements.txt
 
-# Test with sample logs
+# Run batch analysis
 python analyzer.py
+```
 
-2. Configure Telegram (Optional but Recommended)
-Edit config.json:
-{
-  "telegram": {
-    "enabled": true,
-    "token": "YOUR_BOT_TOKEN_HERE",
-    "chat_id": "YOUR_CHAT_ID_HERE",
-    "notify_level": "MEDIUM",
-    "include_realtime": true,
-    "include_batch": true,
-    "rate_limit_seconds": 60
-  }
-}
+---
 
-How to get credentials:
-Chat @BotFather → /newbot → Get token
-Chat @userinfobot → /start → Get chat_id
+## ▶️ Usage
 
-3. Run
-# Batch analysis (with Telegram summary)
+### 📁 Batch Analysis
+
+```bash
 python analyzer.py --log /var/log/auth.log
+```
 
-# Real-time monitoring (with instant alerts)
+### 📤 Export Reports
+
+```bash
+python analyzer.py --json report.json --csv report.csv
+```
+
+### ⚡ Real-Time Monitoring
+
+```bash
 python analyzer.py --follow --log /var/log/auth.log
+```
 
-# Export for SIEM integration
-python analyzer.py --json incident.json --csv audit.csv
-
-🎮 Usage Examples
-
-🖥️ Batch Analysis
-
-$ python analyzer.py --log logs/sample.log
-
-[INFO] Analyzing log file: logs/sample.log
-[INFO] Time window: 5 minutes
-[INFO] Whitelist: 1 IPs/CIDRs
-
-[INFO] Running rule: ssh_failed_login... done. Alerts: 6
-
-═══════════════════════════════════════════════════════════════
-INCIDENT REPORT: INC-20260212-7F3A9B2C
-═══════════════════════════════════════════════════════════════
-Timestamp   : 2026-02-12T15:30:22.123456
-Risk Level  : CRITICAL
-═══════════════════════════════════════════════════════════════
-
-📋 Rule: ssh_failed_login
-   Severity : HIGH
-   MITRE    : T1110 - Brute Force
-   Alerts   : 6
-
-   IP Address        Count    Status     Threshold
-   ----------------  -------  --------  ----------
-   192.168.1.10      10       ALERT     3
-   192.168.1.20      5        ALERT     3
-   10.10.10.10       6        ALERT     3
-   172.16.1.50       6        ALERT     3
-   203.0.113.5       5        ALERT     3
-   198.51.100.7      4        ALERT     3
-
-═══════════════════════════════════════════════════════════════
-
-📱 Real-Time Alerts (Telegram)
-
-$ python analyzer.py --follow --log /var/log/auth.log
-
-[INFO] Realtime monitoring started (Ctrl+C to stop)
-[INFO] Log file: /var/log/auth.log
-[INFO] Time window: 5 minutes
-[INFO] Telegram alerts: ENABLED
-
-[15:30:22] 🚨 ALERT: ssh_failed_login | IP: 192.168.1.10 | Count: 4/3 | Severity: HIGH
-[15:31:05] 🚨 ALERT: ssh_failed_login | IP: 10.10.10.10 | Count: 3/3 | Severity: HIGH
-[15:32:18] 🚨 ALERT: ssh_failed_login | IP: 172.16.1.50 | Count: 5/3 | Severity: HIGH
-
-Telegram Notification:
-
-🔥🔥 HIGH 🔥🔥
-[SENTINEL-LOG SECURITY ALERT]
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-📌 Event: Brute Force Attack - ssh_failed_login
-⚠️ Severity: HIGH
-📍 IP Address: 192.168.1.10
-📋 Rule: ssh_failed_login
-📊 Activity: 4/3 attempts
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🚨 REALTIME DETECTION 🚨
-
-Threshold exceeded in 5 minute window
-
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-🕐 Time (UTC): 2026-02-12 15:30:22
-🔍 Source: Sentinel-Log IDS v2.0
-━━━━━━━━━━━━━━━━━━━━━━━━━━━━
-
-
-🧩 Configuration Deep Dive
-
-Complete config.json Reference
-
-{
-  "log_file": "/var/log/auth.log",
-  "time_window_minutes": 5,
-  "whitelist_ips": [
-    "127.0.0.1",
-    "10.0.0.0/8",      # CIDR support
-    "192.168.1.0/24",
-    "172.16.0.0/12"
-  ],
-  
-  "telegram": {
-    "enabled": false,
-    "token": "YOUR_BOT_TOKEN",
-    "chat_id": "YOUR_CHAT_ID",
-    "notify_level": "MEDIUM",
-    "include_realtime": true,
-    "include_batch": true,
-    "rate_limit_seconds": 60
-  },
-  
-  "rules": {
-    "ssh_failed_login": {
-      "enabled": true,
-      "threshold": 3,
-      "severity": "HIGH",
-      "weight": 3,
-      "pattern": "Failed password.*from (\\d+\\.\\d+\\.\\d+\\.\\d+)",
-      "mitre": {
-        "technique": "T1110",
-        "name": "Brute Force"
-      }
-    },
-    "sudo_privilege_escalation": {
-      "enabled": false,
-      "threshold": 1,
-      "severity": "CRITICAL",
-      "weight": 5,
-      "pattern": "sudo:.*USER=root.*COMMAND=.*(shadow|passwd|sudoers|chmod|chown)",
-      "mitre": {
-        "technique": "T1548.003",
-        "name": "Sudo and Sudo Caching"
-      }
-    }
-  }
-}
+---
 
+## 🧠 Detection Philosophy
 
-📊 SOC Integration
+Sentinel-Log uses:
 
-Exit Codes for Automation
+* Sliding window analysis
+* Behavior-based correlation
+* Rule-based detection
+* Threshold logic
+* Risk scoring
+* MITRE ATT&CK mapping
 
-Code	Risk Level	Description	Action
-0	LOW	No threats detected	✅ Continue
-1	MEDIUM	Suspicious activity	🔍 Investigate
-2	HIGH	Confirmed attack	🚨 Escalate
-3	CRITICAL	Active breach	🚓 Emergency
+This simulates **real SOC detection engineering**.
 
-Integration example with cron/SOAR:
+---
 
-#!/bin/bash
-# Daily security scan with automated ticketing
+## 📄 Example Detection Output
 
-python analyzer.py --log /var/log/auth.log --json report.json
-EXIT_CODE=$?
+```text
+[INCIDENT] INC-20260115-AB12CD
+[RISK] HIGH
 
-case $EXIT_CODE in
-  3) curl -X POST https://ticketing.company.com/api/incident -d @report.json ;;
-  2) python send_slack_alert.py "High risk detected" ;;
-  1) logger -p auth.warning "Medium risk from Sentinel-Log" ;;
-esac
+Rule     : ssh_failed_login
+Severity : HIGH
+MITRE    : T1110 - Brute Force
+IP Address        Count    Status
+192.168.1.10      3        ALERT
+```
 
+---
 
-🧪 Detection Methodology
+## 📜 Exit Codes (SOC Standard)
 
-Sliding Window Algorithm
+| Code | Meaning       |
+| ---- | ------------- |
+| 0    | No threat     |
+| 1    | Medium risk   |
+| 2    | High risk     |
+| 3    | Critical risk |
 
-Time Window: 5 minutes
-IP: 192.168.1.10
-Events: [10:21:01, 10:21:05, 10:21:10, 10:21:15, ...]
+---
 
-Window 1 (10:21:01-10:26:01): 5 attempts → ALERT
-Window 2 (10:21:05-10:26:05): 5 attempts → ALERT
-Maximum concurrent attempts: 10 → CRITICAL
+## 🧠 Deployment Model
 
-Risk Scoring
+Sentinel-Log supports:
 
-CRITICAL: score ≥ 10  (Immediate escalation)
-HIGH:     score ≥ 5   (Confirmed attack)
-MEDIUM:   score ≥ 3   (Suspicious)
-LOW:      score < 3   (Normal)
+* Manual execution
+* Background daemon mode
+* systemd service deployment
+* SOC server deployment
+* VM deployment
+* Lab environment
+* Enterprise simulation
 
-🔒 Security Assurance
-Read-Only Operations ✅
-No packet injection
+---
 
-No system modification
+## 🔧 systemd Service Support (Enterprise Mode)
 
-No active scanning
+Sentinel-Log can be deployed as a **system service**:
 
-No privilege escalation
+```bash
+sudo systemctl start sentinel-log
+sudo systemctl stop sentinel-log
+sudo systemctl status sentinel-log
+```
 
-No kernel modules
+This allows:
 
-Data Privacy ✅
-Local processing only
+* Auto-start on boot
+* Headless monitoring
+* Server-mode operation
+* Continuous SOC monitoring
 
-No cloud backhaul
+---
 
-Configurable telemetry
+## 🛡️ Security & Ethics
 
-GDPR/CCPA compliant
+Sentinel-Log is strictly:
 
+* Defensive
+* Passive
+* Monitoring-only
+* Detection-only
+* Analysis-only
 
-🎓 Training & Use Cases
+❌ No exploitation
+❌ No scanning
+❌ No brute-force
+❌ No attack features
 
-SOC Analyst Training
+---
 
-# Day 1: Basic detection
-python analyzer.py --log training/day1/auth.log
+## 🎓 Intended Use
 
-# Day 2: Telegram alerts
-python analyzer.py --follow --log training/day2/attack.log
+* SOC training
+* Blue Team labs
+* Detection engineering practice
+* Cybersecurity education
+* Defensive research
+* Security portfolio
+* Academic projects
 
-# Day 3: SIEM export
-python analyzer.py --json handover.json --csv evidence.csv
+---
 
+## 🗺️ Roadmap
 
-Blue Team Exercises
+### v3 (Current)
 
-Brute force simulation with multiple attackers
+* Enterprise IDS engine
+* Telegram SOC alerts
+* Real-time monitoring
+* Risk engine
+* systemd deployment
 
-False positive tuning using whitelist CIDR
+### v4 (Planned)
 
-Alert fatigue reduction with rate limiting
+* Multi-log source
+* Plugin detection engine
+* Detection packs
+* Multi-agent support
+* Centralized dashboard
 
-Incident response using Telegram bot
+### v5 (Future)
 
+* Web UI
+* SOC dashboard
+* SIEM integration
+* Multi-node correlation
+* Threat intelligence feeds
 
-👨‍💻 Author
-Ikhsan Rasyid Rabbani
+---
 
-🛡️ Blue Team Enthusiast
+## 👤 Author
 
-🔍 SOC Automation Engineer
+**Ikhsan Rasyid Rabbani**
+Cybersecurity Student
+Blue Team Specialist
+SOC & Detection Engineering Enthusiast
 
-🎓 Cybersecurity Student
+---
 
-"Defense should be accessible to everyone, not just enterprises with million-dollar budgets."
+## 📜 License
 
-⚖️ License
-MIT License © 2026 Ikhsan Rasyid Rabbani
+MIT License
+Free to use for **educational, academic, and defensive security purposes**.
 
-Free for:
+---
 
-✅ Educational institutions
+> "Defense is not about reacting to attacks. It's about understanding behavior before damage happens."
+> — Sentinel-Log Philosophy
 
-✅ SOC teams
-
-✅ Personal labs
-
-✅ Commercial use
-
-✅ Modification & distribution
-
-Required:
-
-📝 Copyright notice
-
-📄 License text inclusion
-
-No warranty - Use at your own risk in production environments.
-
-<p align="center"> <img src="https://img.shields.io/badge/SOC-Ready-success" /> <img src="https://img.shields.io/badge/Blue%20Team-Approved-blue" /> <img src="https://img.shields.io/badge/Enterprise-Grade-orange" /> <br /> <strong>Made with 🛡️ for the defensive security community</strong> </p> ```
-🔥 Summary Perubahan:
-✅ Enterprise Features Added:
-Telegram integration docs
-
-CIDR whitelist support
-
-CRITICAL risk level
-
-Multi-format timestamps
-
-✅ Professional Polish:
-Badges (License, Python, Telegram, MITRE)
-
-Comparison table vs traditional IDS
-
-Complete config.json reference
-
-SOC exit codes table
-
-Integration examples (cron, SOAR)
-
-Roadmap 2026
-
-Contributing guidelines
-
-✅ User Experience:
-"3 Minute Quick Start"
-
-Telegram setup guide
-
-Real screenshot placeholders
-
-Training curriculum
-
-Mobile notification preview

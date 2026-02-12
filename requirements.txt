@@ -1,6 +1,7 @@
 # Sentinel-Log Dependencies
 # -------------------------
 requests>=2.25.0,<3.0    # For Telegram bot API
+python-dateutil>=2.8.2
 # ipaddress              # (Opsional) Untuk validasi IP
 # python-dateutil        # (Opsional) Untuk parsing timestamp lebih akurat
 
