@@ -1,21 +1,70 @@
-# Sensitive data
-/tmp/sentinel-pro/
-/var/lib/sentinel/
-*.log
-*.lock
+# ================================
+# SENTINEL-SSH IGNORE RULES
+# ================================
+
+# ===== Runtime State =====
+/tmp/sentinel-ssh/
+sentinel.lock
+brute_*.log
 cache_*
+SUCCESS_*
+BRUTE_*
 
-# Config dengan token
-config.json
-!config.sample.json
+# ===== Logs =====
+*.log
+*.out
 
-# OS files
-.DS_Store
-Thumbs.db
+# ===== Secrets & Config =====
+.env
+*.env
+*.token
+*.secret
+*.key
+config.env
+telegram.env
+secrets.env
+
+# ===== Backup Files =====
+*.bak
+*.old
+*.backup
 *.swp
-*.swo
+*.tmp
 *~
 
-# IDE
+# ===== OS Files =====
+.DS_Store
+Thumbs.db
+desktop.ini
+
+# ===== Editor / IDE =====
 .vscode/
 .idea/
+*.code-workspace
+
+# ===== Shell Artifacts =====
+nohup.out
+*.pid
+
+# ===== Archive =====
+*.zip
+*.tar
+*.gz
+*.7z
+
+# ===== Python (if future migrate) =====
+__pycache__/
+*.pyc
+venv/
+.env/
+
+# ===== Testing =====
+test/
+tests/
+debug/
+sandbox/
+
+# ===== Systemd =====
+*.service.bak
+*.timer.bak
+

@@ -1,112 +1,166 @@
-# Sentinel-PRO - Real-time Security Monitor
+# 🔐 SENTINEL-SSH
 
-![Version](https://img.shields.io/badge/version-6.0-blue)
-![License](https://img.shields.io/badge/license-MIT-green)
-![Bash](https://img.shields.io/badge/bash-5.0%2B-orange)
+**SENTINEL-SSH** adalah sistem deteksi keamanan berbasis Bash yang fokus **100% pada SSH security monitoring**, tanpa noise, tanpa fake detection, tanpa IDS palsu, dan tanpa scan buatan.
 
-Sentinel-PRO adalah **real-time security monitoring tool** yang mendeteksi serangan SSH brute force, port scanning, dan Nmap scan secara langsung dari log sistem. **100% passive detection - no blocking!**
+> Real logs. Real attacks. Real detection.
 
-## ✨ Fitur Utama
+---
 
-- 🔑 **SSH Brute Force Detection** - Alert jika 3x gagal login dalam 60 detik
-- ✅ **SSH Success Login Alert** - Real-time notifikasi login berhasil
-- 🔍 **Nmap Scan Detection** - SYN, UDP, FIN, NULL, XMAS, OS fingerprinting
-- 🎯 **Port Scan Detection** - Multi-port scanning dari UFW log
-- 🌍 **GeoIP Lookup** - Lihat negara penyerang langsung dari Telegram
-- ⚡ **Anti Spam** - Cooldown 5 menit per IP
-- 🚫 **No Blocking** - Passive detection only, aman untuk production
+## 🚀 Fitur Utama
 
-## 📋 Prasyarat
+### 🔥 Deteksi Aktif
+- ✅ SSH Brute Force Detection  
+- ✅ SSH Successful Login Detection  
+- ✅ Real-time monitoring  
+- ✅ Passive detection mode (tanpa blokir otomatis)  
 
-- Ubuntu/Debian (atau Linux dengan systemd)
-- `curl` - Untuk kirim Telegram
-- `ufw` - Untuk firewall logging (optional, tapi direkomendasikan)
+### 🧠 Engine
+- Behavioral log correlation  
+- Time-window analysis  
+- Cooldown alert system  
+- GeoIP detection (ip-api.com)  
+- State-based tracking  
 
-## 🚀 Instalasi Cepat
+---
+
+## 🧬 Arsitektur Sistem
+
+```
+
+/var/log/auth.log
+│
+▼
+[ Log Stream Monitor ]
+│
+▼
+[ Behavioral Analyzer ]
+│
+├─ Failed password pattern
+├─ Time window correlation
+├─ Brute force threshold
+├─ Cooldown system
+├─ GeoIP resolver
+│
+▼
+[ Telegram Alert Engine ]
+
+````
+
+---
+
+## 📦 Instalasi
 
 ```bash
-# Clone repository
-git clone https://github.com/username/sentinel-pro.git
-cd sentinel-pro
+git clone https://github.com/username/sentinel-ssh.git
+cd sentinel-ssh
+chmod +x sentinel-ssh.sh
+````
 
-# Install dependencies
-sudo apt update && sudo apt install -y curl ufw
+Edit konfigurasi Telegram:
 
-# Setup konfigurasi
-cp config.sample.json /etc/sentinel/config.json
-nano /etc/sentinel/config.json  # Isi token & chat_id Telegram
+```bash
+nano sentinel-ssh.sh
+```
 
-# Jalankan
-sudo ./sentinel.sh
+```bash
+TOKEN="YOUR_BOT_TOKEN_HERE"
+CHAT_ID="YOUR_CHAT_ID_HERE"
+```
 
+---
 
-📱 Setup Telegram Bot
+## ▶️ Menjalankan
 
-Chat ke @BotFather di Telegram
+```bash
+sudo ./sentinel-ssh.sh
+```
 
-Kirim /newbot dan ikuti petunjuk
+Stop sistem:
 
-Dapatkan token, simpan di config
+```bash
+sudo ./sentinel-ssh.sh kill
+```
 
-Chat ke @userinfobot dapatkan chat_id
+---
 
-Masukkan ke file config
+## 🧪 Testing Real
 
+### Brute force test:
 
-⚙️ Konfigurasi
+```bash
+ssh root@SERVER_IP
+# salah password 3x
+```
 
-Edit /etc/sentinel/config.json:
+➡️ Alert Telegram: **SSH_BRUTE**
 
-{
-  "telegram": {
-    "token": "YOUR_BOT_TOKEN",
-    "chat_id": "YOUR_CHAT_ID"
-  },
-  "thresholds": {
-    "ssh_brute": 3,
-    "port_scan": 5,
-    "syn_flood": 20
-  }
-}
+### Login success test:
 
+```bash
+ssh user@SERVER_IP
+# login berhasil
+```
 
-🎯 Cara Penggunaan
+➡️ Alert Telegram: **SSH_SUCCESS**
 
-# Jalankan di foreground
-sudo ./sentinel.sh
+---
 
-# Jalankan di background dengan screen
-sudo apt install screen -y
-screen -dmS sentinel sudo ./sentinel.sh
+## 🛡️ Filosofi Sistem
 
-# Stop semua proses
-sudo ./sentinel.sh kill
+> "Jika tidak ada log, maka tidak ada serangan."
+> "Jika tidak ada event, maka tidak ada alert."
+> "Deteksi harus berbasis bukti, bukan asumsi."
 
-# Lihat log
-tail -f /tmp/sentinel-pro/*.log
+SENTINEL-SSH tidak membuat data palsu.
+Tidak memprediksi.
+Tidak mengarang.
+Tidak simulasi.
+Tidak fake detection.
 
+---
 
-📊 Contoh Alert Telegram
+## 📁 Struktur State
 
-🚨 SSH BRUTE FORCE 🚨
-┌─ 🌍 IP     : 185.142.53.123
-├─ 📍 Negara : NL
-├─ 🔢 Attempt: 3 kali/60s
-└─ ⏰ Waktu  : 14:32:15 12/02/2026
+```
+/tmp/sentinel-ssh/
+├─ brute_<ip>.log
+├─ cache_<ip>
+├─ SUCCESS_<ip>
+├─ BRUTE_<ip>
+└─ sentinel.lock
+```
 
-🔒 Security Notes
-TIDAK ADA IP PALSU! - Semua alert dari log asli
+---
 
-PASSIVE DETECTION ONLY - Tidak ada blocking/iptables
+## ⚙️ Dependensi
 
-Token Telegram aman - Baca dari file config, bukan hardcode
+* bash
+* curl
+* coreutils
+* tail
+* grep
+* sed
+* awk
 
-📄 Lisensi
-MIT License - Lihat LICENSE untuk detail
+Auto-install:
 
-👨‍💻 Author
-Ikhsan Rasyid Rabbani
+```bash
+sudo apt install -y curl
+```
 
-GitHub: Suzumecan
+---
 
-LinkedIn: Ikhsan Rasyid Rabbani
+## 📜 Lisensi
+
+MIT License
+Free to use, modify, distribute.
+
+---
+
+## 👤 Author
+
+**Ikhsan Rasyid Rabbani**
+Sentinel Project Series
+Security Research & Defensive Engineering
+
+---
